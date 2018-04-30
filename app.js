@@ -1,13 +1,9 @@
 const http = require('http');
-const fs = require('fs');
-const path = require('path');
-
-var ipc = require('node-ipc');
+const ipc = require('node-ipc');
 
 // ipc configuration
 // TODO expose more ipc.config https://www.npmjs.com/package/node-ipc
 ipc.config.id = 'nanoStream';
-ipc.config.retry = 1500;
 
 
 // Default port and host of the webserver that receives callbacks from the
@@ -25,29 +21,13 @@ args.forEach((arg, index, array) => {
 });
 
 // Establish new ipc socket server
-ipc.serve(
-  function(){
-    ipc.server.on(
-      'connect',
-      function(socket) {
-        console.log('Client has connected!')
-      }
-    );
-    ipc.server.on(
-      'socket.disconnected',
-      function(socket) {
-        console.log('Client has disconnected!');
-      }
-    );
-  }
-);
-
+ipc.serve();
 ipc.server.start();
 
 
 // Webserver request handler
 const requestHandler = (request, response) => {
-  console.log(request.method, request.url)
+  console.log(request.method, request.url);
 
   // Handle any POST request
   if (request.method === 'POST') {
@@ -57,7 +37,7 @@ const requestHandler = (request, response) => {
 
     // TODO make this a proper stream
     request.on('end', () => {
-      payload = JSON.stringify(JSON.parse(body));
+      const payload = JSON.stringify(JSON.parse(body));
 
       // Broadcast payload to all connected clients
       if (ipc.server.sockets.length > 0) {
@@ -70,14 +50,14 @@ const requestHandler = (request, response) => {
     });
   }
 
-}
+};
 
-const webServer = http.createServer(requestHandler)
+const webServer = http.createServer(requestHandler);
 
 webServer.listen(port, (err) => {
   if (err) {
-    return console.log('Something bad happened', err)
+    return console.error('Something bad happened', err);
   }
 
-  console.log(`Web server is listening on ${host}:${port}`)
-})
+  console.log(`Web server is listening on ${host}:${port}`);
+});
