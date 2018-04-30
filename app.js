@@ -15,7 +15,7 @@ let host = 'http://127.0.0.1';
 // Process any args passed in and overwrite defaults
 const args =  process.argv.slice(2);
 args.forEach((arg, index, array) => {
-  const [key, value] = arg.split('=')
+  const [key, value] = arg.split('=');
   if (key === 'port') port = value;
   if (key === 'host') host = value;
 });
