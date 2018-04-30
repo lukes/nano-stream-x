@@ -1,7 +1,7 @@
 
 # nano-stream-x
 
-A tiny and performant server that streams blocks as they are processed by a [Nano currency](https://nano.org/) node to a socket that other processes can listen to.
+A tiny and performant server that streams blocks as they are processed by a [Nano currency](https://nano.org/) node to a socket for other processes to receive.
 
 This package is the base library for other `nano-stream` npm packages, which receive the stream and turn it into something else.
 
