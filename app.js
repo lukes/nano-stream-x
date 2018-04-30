@@ -8,16 +8,16 @@ ipc.config.id = 'nanoStream';
 
 // Default port and host of the webserver that receives callbacks from the
 // nano RPC
-let port = 3000;
-let host = 'http://127.0.0.1';
-
+const CONF = {
+  port: 3000,
+  host: '127.0.0.1'
+};
 
 // Process any args passed in and overwrite defaults
 const args =  process.argv.slice(2);
 args.forEach((arg) => {
   const [key, value] = arg.split('=');
-  if (key === 'port') port = value;
-  if (key === 'host') host = value;
+  CONF[key] = value;
 });
 
 // Establish new ipc socket server
@@ -54,10 +54,10 @@ const requestHandler = (request, response) => {
 
 const webServer = http.createServer(requestHandler);
 
-webServer.listen(port, (err) => {
+webServer.listen(CONF, (err) => {
   if (err) {
     return console.error('Something bad happened', err);
   }
 
-  console.log(`Web server is listening on ${host}:${port}`);
+  console.log(`Web server is listening on ${CONF.host}:${CONF.port}`);
 });
