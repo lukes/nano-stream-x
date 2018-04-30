@@ -1,14 +1,15 @@
 {
   "name": "nano-stream-x",
   "version": "0.1.0",
-  "description": "A lightweight and performant server that streams blocks from a Nano currency node",
+  "description": "A tiny and performant server that streams blocks from a Nano currency node",
   "main": "app.js",
+  "homepage": "https://github.com/lukes/nano-stream-x",
   "dependencies": {
     "node-ipc": "^9.1.1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/lukes/nano-stream-x"
+    "url": "https://github.com/lukes/nano-stream-x.git"
   },
   "keywords": [
     "nano",
