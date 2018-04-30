@@ -1,8 +1,8 @@
 {
-  "name": "nano-stream",
+  "name": "nano-stream-x",
   "version": "0.1.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "dependencies": {
     "node-ipc": "^9.1.1"
   },
