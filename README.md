@@ -7,7 +7,7 @@ This package is intended to support other npm packages rather than to be run on 
 
 See:
 
-* nano-stream-ws - Stream to websockets
+* [nano-stream-ws](https://github.com/lukes/nano-stream-ws) - Stream to websockets
 * nano-stream-mqtt - Stream to mqtt (TODO)
 * nano-stream-ampq - Stream to ampq (TODO)
 
