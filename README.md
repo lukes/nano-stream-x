@@ -8,6 +8,7 @@ This package is the base library for other `nano-stream` npm packages, which rec
 See:
 
 * [nano-stream-ws](https://github.com/lukes/nano-stream-ws) - Stream to websockets
+* [nano-stream-amqp](https://github.com/lukes/nano-stream-amqp) - Stream to AMQP (like RabbitMQ)
 
 ## Installation
 
