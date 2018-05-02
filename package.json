@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "A tiny and performant server that streams blocks from a Nano currency node",
   "main": "app.js",
+  "bin": "app.js",
   "homepage": "https://github.com/lukes/nano-stream-x",
   "dependencies": {
     "node-ipc": "^9.1.1"
