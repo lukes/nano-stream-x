@@ -15,7 +15,8 @@ const CONF = {
 };
 
 // Establish new ipc socket server
-ipc.serve();
+const ipcPath = ipc.config.socketRoot+ipc.config.appspace+ipc.config.id;
+ipc.serve(ipcPath);
 ipc.server.start();
 
 
