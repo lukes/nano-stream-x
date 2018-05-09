@@ -4,8 +4,9 @@ const http = require('http');
 const ipc = require('node-ipc');
 
 // ipc configuration
-// TODO expose more ipc.config https://www.npmjs.com/package/node-ipc
 ipc.config.id = 'nanoStream';
+ipc.config.retry = 1500;
+ipc.config.logger = () => {}; // Make ipc logger a no-op
 
 const args = {};
 // Collect all args passed in
@@ -22,6 +23,8 @@ const host = args.host || '127.0.0.1';
 const ipcPath = ipc.config.socketRoot + ipc.config.appspace + ipc.config.id;
 ipc.serve(ipcPath);
 ipc.server.start();
+ipc.server.on('connect', () => console.debug('nano-stream client connected'));
+ipc.server.on('socket.disconnected', () => console.debug('nano-stream client disconnected'));
 
 
 // Webserver request handler
