@@ -8,19 +8,11 @@ const ipc = require('node-ipc');
 ipc.config.id = 'nanoStream';
 
 
-// Default port and host of the webserver that receives callbacks from the
-// nano RPC
+// Port and host of the webserver that receives callbacks from the Nano RPC
 const CONF = {
-  port: 3000,
-  host: '127.0.0.1'
+  port: process.env.PORT || 3000,
+  host: process.env.HOST || '127.0.0.1'
 };
-
-// Process any args passed in and overwrite defaults
-const args =  process.argv.slice(2);
-args.forEach((arg) => {
-  const [key, value] = arg.split('=');
-  CONF[key] = value;
-});
 
 // Establish new ipc socket server
 ipc.serve();
