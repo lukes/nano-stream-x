@@ -3,7 +3,7 @@
 
 A tiny and performant server that streams blocks as they are processed by a [Nano currency](https://nano.org/) node to a socket for other processes to receive.
 
-This package is the base library for other `nano-stream` npm packages, which receive the stream and turn it into something else.
+This package isn't intended to be used by itself, but instead is the base library for other `nano-stream` npm packages which receive the stream and turn it into something else.
 
 See:
 
@@ -25,3 +25,7 @@ The server will default to running on `http://127.0.0.1:3000`.
 Override these defaults by passing in `host` or `port` arguments:
 
     nano-stream-x host=ip6-localhost port=3001
+
+### Configure your Nano node to send data to the server
+
+See the [wiki article](https://github.com/lukes/nano-stream-x/wiki/Configure-your-Nano-node-to-send-data-to-the-nano-stream-x).
