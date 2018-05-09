@@ -7,15 +7,19 @@ const ipc = require('node-ipc');
 // TODO expose more ipc.config https://www.npmjs.com/package/node-ipc
 ipc.config.id = 'nanoStream';
 
+const args = {};
+// Collect all args passed in
+process.argv.slice(2).forEach((arg) => {
+  const [key, value] = arg.split('=');
+  args[key] = value;
+});
 
 // Port and host of the webserver that receives callbacks from the Nano RPC
-const CONF = {
-  port: process.env.PORT || 3000,
-  host: process.env.HOST || '127.0.0.1'
-};
+const port = args.port || 3000;
+const host = args.host || '127.0.0.1';
 
 // Establish new ipc socket server
-const ipcPath = ipc.config.socketRoot+ipc.config.appspace+ipc.config.id;
+const ipcPath = ipc.config.socketRoot + ipc.config.appspace + ipc.config.id;
 ipc.serve(ipcPath);
 ipc.server.start();
 
@@ -49,10 +53,10 @@ const requestHandler = (request, response) => {
 
 const webServer = http.createServer(requestHandler);
 
-webServer.listen(CONF, (err) => {
+webServer.listen({port: port, host: host}, (err) => {
   if (err) {
     return console.error('Something bad happened', err);
   }
 
-  console.log(`Web server is listening on ${CONF.host}:${CONF.port}`);
+  console.log(`Web server is listening on ${host}:${port}`);
 });
