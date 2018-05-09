@@ -24,4 +24,4 @@ The server will default to running on `http://127.0.0.1:3000`.
 
 Override these defaults by passing in `host` or `port` arguments:
 
-    nano-stream-x host=ipv6-localhost port=3001
+    nano-stream-x host=ip6-localhost port=3001
