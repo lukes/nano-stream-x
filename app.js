@@ -35,7 +35,8 @@ const recordRequest = () => {
   transactionCount += 1;
 };
 
-// Returns the current transactions per second
+// Returns the current transactions per second.
+// Will return undefined until 1s of data has been collected
 const tps = () => {
   const recorded = transactionRecord.filter(d => d !== undefined);
   if (recorded.length == 0) return undefined;
@@ -43,9 +44,10 @@ const tps = () => {
   return total / recorded.length;
 };
 
-// Returns the current transactions per minute
+// Returns the current transactions per minute.
+// Will return undefined until 60s of data has been collected
 const tpm = () => {
-  if (transactionRecord.filter(d => d !== undefined).length < transactionRecord.length) return undefined;
+  if (transactionRecord.find(d => d == undefined)) return undefined;
   return transactionRecord.reduce((total, num) => total + num);
 };
 
