@@ -26,6 +26,35 @@ ipc.server.start();
 ipc.server.on('connect', () => console.debug('nano-stream client connected'));
 ipc.server.on('socket.disconnected', () => console.debug('nano-stream client disconnected'));
 
+let transactionCount = 0; // cleared every second
+// Transaction record is an array containing counts of the last 60s of transactions,
+// each element will represent the total per second
+let transactionRecord = Array(60).fill(undefined);
+
+const recordRequest = () => {
+  transactionCount += 1;
+};
+
+// Returns the current transactions per second
+const tps = () => {
+  const recorded = transactionRecord.filter(d => d !== undefined);
+  if (recorded.length == 0) return undefined;
+  const total = recorded.reduce((total, num) => total + num);
+  return total / recorded.length;
+};
+
+// Returns the current transactions per minute
+const tpm = () => {
+  if (transactionRecord.filter(d => d !== undefined).length < transactionRecord.length) return undefined;
+  return transactionRecord.reduce((total, num) => total + num);
+};
+
+// Every second move the transactionCount into the transactionRecord array and reset it
+setInterval(() => {
+  const i = Math.floor(new Date().getSeconds());
+  transactionRecord[i] = transactionCount;
+  transactionCount = 0;
+}, 1000);
 
 // Webserver request handler
 const requestHandler = (request, response) => {
@@ -39,7 +68,12 @@ const requestHandler = (request, response) => {
 
     // TODO make this a proper stream
     request.on('end', () => {
-      const payload = JSON.stringify(JSON.parse(body));
+      let payload = Object.assign(JSON.parse(body), {
+        tps: tps(),
+        tpm: tpm()
+      });
+
+      payload = JSON.stringify(payload);
 
       // Broadcast payload to all connected clients
       if (ipc.server.sockets.length > 0) {
@@ -48,6 +82,7 @@ const requestHandler = (request, response) => {
         console.log(`No connected clients. Payload was: ${payload}`);
       }
 
+      recordRequest();
       response.end('ok');
     });
   }
