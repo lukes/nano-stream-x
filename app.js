@@ -31,10 +31,6 @@ let transactionCount = 0; // cleared every second
 // each element will represent the total per second
 let transactionRecord = Array(60).fill(undefined);
 
-const recordRequest = () => {
-  transactionCount += 1;
-};
-
 // Returns the current transactions per second.
 // Will return undefined until 1s of data has been collected
 const tps = () => {
@@ -64,12 +60,15 @@ const requestHandler = (request, response) => {
 
   // Handle any POST request
   if (request.method === 'POST') {
+    transactionCount += 1;
+
     let body = '';
 
     request.on('data', chunk => body += chunk.toString());
 
     // TODO make this a proper stream
     request.on('end', () => {
+
       let payload = Object.assign(JSON.parse(body), {
         tps: tps(),
         tpm: tpm()
@@ -84,7 +83,6 @@ const requestHandler = (request, response) => {
         console.log(`No connected clients. Payload was: ${payload}`);
       }
 
-      recordRequest();
       response.end('ok');
     });
   }
