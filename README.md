@@ -9,6 +9,7 @@ See:
 
 * [nano-stream-ws](https://github.com/lukes/nano-stream-ws) - Stream to websockets
 * [nano-stream-amqp](https://github.com/lukes/nano-stream-amqp) - Stream to AMQP (like RabbitMQ)
+* [nano-stream-mqtt](https://github.com/lukes/nano-stream-mqtt) - Stream to MQTT (like Mosquitto)
 
 ## Installation
 
