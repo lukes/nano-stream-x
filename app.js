@@ -23,8 +23,8 @@ const host = args.host || '127.0.0.1';
 const ipcPath = ipc.config.socketRoot + ipc.config.appspace + ipc.config.id;
 ipc.serve(ipcPath);
 ipc.server.start();
-ipc.server.on('connect', () => console.debug('nano-stream client connected'));
-ipc.server.on('socket.disconnected', () => console.debug('nano-stream client disconnected'));
+ipc.server.on('connect', () => console.info('nano-stream client connected'));
+ipc.server.on('socket.disconnected', () => console.info('nano-stream client disconnected'));
 
 let transactionCount = 0; // cleared every second
 // Transaction record is an array containing counts of the last 60s of transactions,
