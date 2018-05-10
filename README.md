@@ -47,10 +47,12 @@ The data is sent as stringified JSON. An example of the data that is sent to the
       "work":"f57ec8eab4e3d760",
       "signature":"DBD8ECA13CCDEC87FAE0E7B2AAA2460492249410A18E9C06AD454862260038D8B55ACD130F9C402C24ED3E97C579E33C82B93368156B8E0E4183CF7B45205B0A"
    },
-   "amount":"1099000000000000000000000000000000"
+   "amount":"1099000000000000000000000000000000",
+   "tps":0.65,
+   "tpm":39
 }
 ```
 
-After 1s of uptime the data will include a `tps` property, with a value representing the current transactions per second. TPS is based on the last 60s of activity and is updated every second.
+`tps` is a value representing the current transactions per second. TPS is based on the last 60s of activity and is updated every second, and will be `null` until 1s of uptime.
 
-After 60s of uptime the data will include a `tpm` property, with a value representing the current transactions per minute. TPM is based on the last 60s of activity and is updated every second.
+`tpm` is a value representing the current transactions per minute. TPM is based on the last 60s of activity and is updated every second, and will be `null` until 60s of uptime.
