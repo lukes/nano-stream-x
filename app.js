@@ -78,6 +78,7 @@ const requestHandler = (request, response) => {
 
       // Convert amounts to ints
       payload.amount = parseInt(payload.amount);
+      payload.is_send = payload.is_send === 'true';
 
       // Merge block data into top level object, and add tps and tpm
       payload = Object.assign(payload, block);
