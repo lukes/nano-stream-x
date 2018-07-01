@@ -2,6 +2,7 @@
 
 const http = require('http');
 const ipc = require('node-ipc');
+const BigNumber = require('bignumber.js');
 
 // ipc configuration
 ipc.config.id = 'nanoStream';
@@ -69,20 +70,34 @@ const requestHandler = (request, response) => {
     // TODO make this a proper stream
     request.on('end', () => {
 
+      // Construct a payload
       let payload = JSON.parse(body);
 
       // Parse block
       let block = JSON.parse(payload.block);
       delete payload.block;
-      block.balance = parseInt(block.balance);
 
-      // Convert amounts to ints
-      payload.amount = parseInt(payload.amount);
-      payload.is_send = payload.is_send === 'true';
+      // Convert amounts to ints as raw, and add in amounts in NANO
+      if (block.balance) {
+        Object.assign(block, {
+          balance_raw: parseInt(block.balance),
+          balance: new BigNumber(block.balance).shiftedBy(-30).toFixed(15, 1)
+        });
+      }
+
+      if (payload.amount) {
+        Object.assign(payload, {
+          amount_raw: parseInt(payload.amount),
+          amount: new BigNumber(payload.amount).shiftedBy(-30).toFixed(15, 1)
+        });
+      }
 
       // Merge block data into top level object, and add tps and tpm
-      payload = Object.assign(payload, block);
-      payload = Object.assign(payload, {
+      Object.assign(payload, block);
+
+      // Add in tps and tpm, and make is_send a boolean
+      Object.assign(payload, {
+        is_send: payload.is_send === 'true',
         tps: tps(),
         tpm: tpm()
       });

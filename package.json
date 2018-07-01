@@ -6,6 +6,7 @@
   "bin": "app.js",
   "homepage": "https://github.com/lukes/nano-stream-x",
   "dependencies": {
+    "bignumber.js": "^7.2.1",
     "node-ipc": "^9.1.1"
   },
   "repository": {
