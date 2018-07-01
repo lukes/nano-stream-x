@@ -56,7 +56,7 @@ setInterval(() => {
 
 // Webserver request handler
 const requestHandler = (request, response) => {
-  console.log(request.method, request.url);
+  console.debug(request.method, request.url);
 
   // Handle any POST request
   if (request.method === 'POST') {
@@ -80,7 +80,7 @@ const requestHandler = (request, response) => {
       if (ipc.server.sockets.length > 0) {
         ipc.server.broadcast('payload', payload);
       } else {
-        console.log(`No connected clients. Payload was: ${payload}`);
+        console.info(`No connected clients. Payload was: ${payload}`);
       }
 
       response.end('ok');
@@ -96,5 +96,5 @@ webServer.listen({port: port, host: host}, (err) => {
     return console.error('Something bad happened', err);
   }
 
-  console.log(`Web server is listening on ${host}:${port}`);
+  console.info(`Web server is listening on ${host}:${port}`);
 });
