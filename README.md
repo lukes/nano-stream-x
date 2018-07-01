@@ -38,20 +38,21 @@ The data is sent as stringified JSON. An example of the data that is sent to the
 ```json
 {
     "account": "xrb_3jwrszth46kk1mu7rmb4rhm54us8yg1gw3ipodftqtikf5yqdyr7471nsg1k",
+    "amount": 0.5,
+    "amount_raw": 5e+29,
+    "balance": 16.677787630327758,
+    "balance_raw": 1.6677787630327757e+31,
     "hash": "4A8372BC200C68D71663E61C0C2D021550BBCEB0C811A24771E600C0E4732D21",
-    "type": "state",
-    "account": "xrb_3jwrzzth46rk1mu7rmb4rhm54us8yg1gw3ipodftqtikf5yqdyr7471nsg1k",
-    "previous": "86A36FC1361843D5EA4F2FF69967D1EFC0AAE85C741E022A721305581332226F",
-    "representative": "xrb_3jwsszth46rk1mu7rmb4rhm54us8yg1gw3ipodftqtikf5yqdyr7471nsg1k",
-    "balance": 26427835647256411007907363146171325107,
+    "is_send": true,
     "link": "F637A0883D5667413B7753CB6625DA8AEF403E384C5693F1A2B184C4DD12DCAD",
     "link_as_account": "xrb_3ajqn465tom9a1xqgnyderkxo4qha1z5im4pkhrt7ee6rmgj7q7fmwqoohtn",
+    "type": "state",
+    "previous": "86A36FC1361843D5EA4F2FF69967D1EFC0AAE85C741E022A721305581332226F",
+    "representative": "xrb_3jwsszth46rk1mu7rmb4rhm54us8yg1gw3ipodftqtikf5yqdyr7471nsg1k",
     "signature": "826A46B08F00007C4B807CB2065EE797B918E38EBD1F3855ABE14D2DF151FC551F37480DBDD1C8DA787E6AF9352853FA6F57E6BB64E58E5353699B9748F0120C",
-    "work": "26ad0a6313b8189e",
-    "amount": 999990000000000000000000000000000,
-    "is_send": true,
-    "tps": 0.05,
-    "tpm": 3
+    "tpm": 6,
+    "tps": 0.1,
+    "work": "26ad0a6313b8189e"
 }
 ```
 

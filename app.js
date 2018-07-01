@@ -81,14 +81,14 @@ const requestHandler = (request, response) => {
       if (block.balance) {
         Object.assign(block, {
           balance_raw: parseInt(block.balance),
-          balance: new BigNumber(block.balance).shiftedBy(-30).toFixed(15, 1)
+          balance: parseFloat(new BigNumber(block.balance).shiftedBy(-30).toFixed(15, 1))
         });
       }
 
       if (payload.amount) {
         Object.assign(payload, {
           amount_raw: parseInt(payload.amount),
-          amount: new BigNumber(payload.amount).shiftedBy(-30).toFixed(15, 1)
+          amount: parseFloat(new BigNumber(payload.amount).shiftedBy(-30).toFixed(15, 1))
         });
       }
 
