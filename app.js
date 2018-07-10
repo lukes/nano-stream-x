@@ -98,6 +98,7 @@ const requestHandler = (request, response) => {
       // Add in tps and tpm, and make is_send a boolean
       Object.assign(payload, {
         is_send: payload.is_send === 'true',
+        seen: (new Date()).getTime() / 1000,
         tps: tps(),
         tpm: tpm()
       });
