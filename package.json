@@ -1,6 +1,6 @@
 {
   "name": "nano-stream-x",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A tiny and performant server that streams blocks from a Nano currency node",
   "main": "app.js",
   "bin": "app.js",
