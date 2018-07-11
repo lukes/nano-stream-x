@@ -51,7 +51,7 @@ The data is sent to the socket as stringified JSON. A parsed example of the data
     "representative": "xrb_3jwsszth46rk1mu7rmb4rhm54us8yg1gw3ipodftqtikf5yqdyr7471nsg1k",
     "signature": "826A46B08F00007C4B807CB2065EE797B918E38EBD1F3855ABE14D2DF151FC551F37480DBDD1C8DA787E6AF9352853FA6F57E6BB64E58E5353699B9748F0120C",
     "seen": 1531192356.751,
-    "tpm": 6,
+    "tpm": 6.2,
     "tps": 0.1,
     "work": "26ad0a6313b8189e"
 }
@@ -59,7 +59,7 @@ The data is sent to the socket as stringified JSON. A parsed example of the data
 
 #### Notes about the data
 
-* `seen` is the unix timestamp of when the node processed the block and not the time the block was created or transmitted to the network, as Nano blocks are not timestamped
+* `seen` is the unix timestamp with decimals of when the node processed the block and not the time the block was created or transmitted to the network, as Nano blocks are not timestamped
 
 * `tpm` is a float representing the current transactions _per minute_ averaged from the last 10m of activity
 
