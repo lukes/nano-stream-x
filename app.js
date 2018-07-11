@@ -30,28 +30,34 @@ ipc.server.on('socket.disconnected', () => console.info('nano-stream client disc
 let transactionCount = 0; // cleared every second
 // Transaction record is an array containing counts of the last 60s of transactions,
 // each element will represent the total per second
-let transactionRecord = Array(60).fill(undefined);
+let transactionRecord = Array(60 * 10).fill(undefined);
 
 // Returns the current transactions per second.
 // Will return undefined until 1s of data has been collected
 const tps = () => {
   const recorded = transactionRecord.filter(d => d !== undefined);
   if (recorded.length == 0) return undefined;
-  const total = recorded.reduce((total, num) => total + num);
-  return total / recorded.length;
+
+  const last60Seconds = recorded.slice(0, 60);
+  const total = last60Seconds.reduce((total, num) => total + num);
+  return total / last60Seconds.length;
 };
 
 // Returns the current transactions per minute.
 // Will return undefined until 60s of data has been collected
 const tpm = () => {
-  if (transactionRecord.find(d => d == undefined)) return undefined;
-  return transactionRecord.reduce((total, num) => total + num);
+  const recorded = transactionRecord.filter(d => d !== undefined);
+  if (recorded.length < 60) return undefined;
+
+  const last10Minutes = recorded.slice(0, 60 * 10);
+  const total = last10Minutes.reduce((total, num) => total + num);
+  return total * 60 / last10Minutes.length;
 };
 
-// Every second move the transactionCount into the transactionRecord array and reset it
+// Every second move the transactionCount into the first position in the transactionRecord array and reset it
 setInterval(() => {
-  const i = Math.floor(new Date().getSeconds());
-  transactionRecord[i] = transactionCount;
+  transactionRecord.pop();
+  transactionRecord.unshift(transactionCount);
   transactionCount = 0;
 }, 1000);
 

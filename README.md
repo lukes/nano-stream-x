@@ -61,8 +61,8 @@ The data is sent as stringified JSON. An example of the data that is sent to the
 
 * `seen` is the unix timestamp of when the node processed the block and not the time the block was created or transmitted to the network, as Nano blocks are not timestamped
 
-* `tps` is a value representing the current transactions per second. TPS is based on the last 60s of activity and will be `null` until 1s of uptime
+* `tps` is a value representing the current transactions per second. TPS is averaged from the last 60s of activity and will be `null` until 1s of uptime
 
-* `tpm` is a value representing the current transactions per minute. TPM is based on the last 60s of activity and will be `null` until 60s of uptime
+* `tpm` is a value representing the current transactions per minute. TPM is averaged from the last 10m of activity and will be `null` until 60s of uptime
 
 * `_raw` values are in Nano's `raw` unit (the currency's smallest unit). These values are truly large, but are more accurate that the other values which are in NANO which will be accurate to only 15 decimal places
