@@ -33,13 +33,11 @@ let transactionCount = 0; // cleared every second
 let transactionRecord = Array(60 * 10).fill(undefined);
 
 // Returns the current transactions per second.
-// Will return undefined until 1s of data has been collected
 const tps = () => {
   return tpsOverPastSeconds(60);
 };
 
 // Returns the current transactions per minute.
-// Will return undefined until 1s of data has been collected
 const tpm = () => {
   const tps = tpsOverPastSeconds(60 * 10);
   return tps * 60;
