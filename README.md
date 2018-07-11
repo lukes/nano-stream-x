@@ -1,6 +1,8 @@
 
 # nano-stream-x
 
+[![npm version](https://badge.fury.io/js/nano-stream-x.svg)](https://badge.fury.io/js/nano-stream-x)
+
 A tiny and performant server that streams blocks as they are processed by a [Nano currency](https://nano.org/) node to a socket for other processes to receive.
 
 This package isn't intended to be used by itself, but instead is the base library for other `nano-stream` npm packages which receive the stream and turn it into something else.
