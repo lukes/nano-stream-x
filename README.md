@@ -33,7 +33,7 @@ See the [wiki article](https://github.com/lukes/nano-stream-x/wiki/Configure-you
 
 ## Data
 
-The data is sent as stringified JSON. An example of the data that is sent to the socket:
+The data is sent to the socket as stringified JSON. A parsed example of the data:
 
 ```json
 {
@@ -61,8 +61,8 @@ The data is sent as stringified JSON. An example of the data that is sent to the
 
 * `seen` is the unix timestamp of when the node processed the block and not the time the block was created or transmitted to the network, as Nano blocks are not timestamped
 
-* `tps` is a value representing the current transactions _per second_ averaged from the last 60s of activity
-
 * `tpm` is a value representing the current transactions _per minute_ averaged from the last 10m of activity
+
+* `tps` is a value representing the current transactions _per second_ averaged from the last 60s of activity
 
 * `_raw` values are in Nano's `raw` unit (the currency's smallest unit). These values are truly large, but are more accurate that the other values which are in NANO which will be accurate to only 15 decimal places
