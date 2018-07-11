@@ -35,23 +35,23 @@ let transactionRecord = Array(60 * 10).fill(undefined);
 // Returns the current transactions per second.
 // Will return undefined until 1s of data has been collected
 const tps = () => {
-  const recorded = transactionRecord.filter(d => d !== undefined);
-  if (recorded.length == 0) return undefined;
-
-  const last60Seconds = recorded.slice(0, 60);
-  const total = last60Seconds.reduce((total, num) => total + num);
-  return total / last60Seconds.length;
+  return tpsOverPastSeconds(60);
 };
 
 // Returns the current transactions per minute.
-// Will return undefined until 60s of data has been collected
+// Will return undefined until 1s of data has been collected
 const tpm = () => {
-  const recorded = transactionRecord.filter(d => d !== undefined);
-  if (recorded.length < 60) return undefined;
+  const tps = tpsOverPastSeconds(60 * 10);
+  return tps * 60;
+};
 
-  const last10Minutes = recorded.slice(0, 60 * 10);
-  const total = last10Minutes.reduce((total, num) => total + num);
-  return total * 60 / last10Minutes.length;
+const tpsOverPastSeconds = (nSeconds) => {
+  const recorded = transactionRecord.filter(d => d !== undefined);
+  if (recorded.length === 0) return 1;
+
+  const sampleSize = recorded.slice(0, nSeconds);
+  const total = sampleSize.reduce((total, num) => total + num);
+  return total / sampleSize.length;
 };
 
 // Every second move the transactionCount into the first position in the transactionRecord array and reset it
